@@ -1,0 +1,123 @@
+﻿Dependency Inversion Principle:
+
+High level modules should not depend on low level modules but should depend on abstraction.
+
+
+In our customer class if you remember we had created a logger class to satisfy SRP. Down the line let's say 
+new Logger flavor classes are created.
+
+
+class Customer
+{
+	private FileLogger obj = new FileLogger();
+	public virtual void Add()
+	{
+		try
+		{
+			// Database code goes here
+		}
+		catch (Exception ex)
+		{
+			obj.Handle(ex.ToString());
+		}
+	}
+}
+Just to control things we create a common interface and using this common interface new logger flavors will be created.
+
+
+interface ILogger
+{
+	void Handle(string error);
+}
+
+Below are three logger flavors and more can be added down the line.
+
+
+class FileLogger : ILogger
+{
+	public void Handle(string error)
+	{
+		System.IO.File.WriteAllText(@"c:\Error.txt", error);
+	}
+}
+
+class EverViewerLogger : ILogger
+{
+	public void Handle(string error)
+	{
+		// log errors to event viewer
+	}
+}
+
+class EmailLogger : ILogger
+{
+	public void Handle(string error)
+	{
+		// send errors in email
+	}
+}
+
+Now depending on configuration settings different logger classes will used at given moment. So to achieve the same we have 
+kept a simple IF condition which decides which logger class to be used, see the below code.
+
+QUIZ time, what is the problem here.
+
+HINT: - Watch the CATCH block code.
+
+
+class Customer : IDiscount, IDatabase
+{
+	private IException obj; 
+
+	public virtual void Add(int Exhandle)
+	{
+		try
+		{
+			// Database code goes here
+		}
+		catch (Exception ex)
+		{
+			if (Exhandle == 1)
+			{
+				obj = new MyException();
+			}
+			else
+			{
+				obj = new EmailException();
+			}
+			obj.Handle(ex.Message.ToString());
+		}
+	}
+}
+
+The above code is again violating SRP but this time the aspect is different, its about deciding which objects 
+should be created. Now it's not the work of "Customer" object to decide which instances to be created , he should 
+be concentrating only on Customer class related functionalities.
+
+If you watch closely the biggest problem is the "NEW" keyword. He is taking extra responsibilities of which 
+object needs to be created.
+
+So if we INVERT / DELEGATE this responsibility to someone else rather the customer class doing it that would really 
+solve the problem to a certain extent.
+
+So here's the modified code with INVERSION implemented. We have opened the constructor mouth and we expect someone 
+else to pass the object rather than the customer class doing it. So now it's the responsibility of the client who is 
+consuming the customer object to decide which Logger class to inject.
+
+
+class Customer : IDiscount, IDatabase
+ {
+	private Ilogger obj;
+	public Customer(ILogger i)
+	{
+		obj = i;
+	}
+}
+
+So now the client will inject the Logger object and the customer object is now free from those IF condition which decide 
+which logger class to inject. This is the Last principle in SOLID Dependency Inversion principle.
+
+Customer class has delegated the dependent object creation to client consuming it thus making the customer class 
+concentrate on his work.
+
+IDatabase i = new Customer(new EmailLogger());

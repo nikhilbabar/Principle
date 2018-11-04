@@ -1,0 +1,383 @@
+﻿<div class="info-wrapper">
+    <h4>{{ vm.title }}</h4>
+
+    <div>
+        <h1>Introduction</h1>
+        <div class="padding-left30">
+            <p>
+                MatrixSearch engine provides powerful searching against any string, which makes the precise way of searching nearest strings, this recommendation engine brings together the power of search and spell checking, engine searches nearest word match in any unstructured string.
+            </p>
+            <p>
+                MatrixSearch corrects even spelling mistakes with unmatched accuracy. spelling checker uses a Levenshtein Distance Algorithm which is based on matrix technique to correct any type of mistake and set priorities as per matching strings.
+            </p>
+        </div>
+    </div>
+
+    <!--<div>
+        <h1>Example</h1>
+        <ol>
+            <li>
+                HONDA PORTUGAL SA
+                <div>
+                    <table class="table md-table text-left" border="1">
+                        <thead>
+                            <tr>
+                                <th>Target string</th>
+                                <th>Match count</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="second-priority">
+                                <td>HONDA DEALERS SA</td>
+                                <td>2</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>HONDA SA PTY LTD</td>
+                                <td>2</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>HONDA MOTORS</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>ALFA ROMEO SA</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>HUNDA</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                M 6 COUPE
+                <div>
+                    <table class="table md-table text-left" border="1">
+                        <thead>
+                            <tr>
+                                <th>Target string</th>
+                                <th>Match count</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="first-priority">
+                                <td>M 6 COUP</td>
+                                <td>3</td>
+                                <td>First</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>B.M.W. 6 SERIES COUPE</td>
+                                <td>3</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>BMW M COUPE CAR</td>
+                                <td>2</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>AUDI A5 COUPE</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>OPEL ASTRA COUPE</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>ASTON MARTIN-V8 VANTAGE COUPE</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>AUDI A5 COUPE LEASE</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                HONDA
+                <div>
+                    <table class="table md-table text-left" border="1">
+                        <thead>
+                            <tr>
+                                <th>Target string</th>
+                                <th>Match count</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="first-priority">
+                                <td>HONDA</td>
+                                <td>1</td>
+                                <td>First</td>
+                            </tr>
+                            <tr class="first-priority">
+                                <td>HUNDA</td>
+                                <td>1</td>
+                                <td>First</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>HONDA CORPORATION</td>
+                                <td>1</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>HONDA MOTORS</td>
+                                <td>1</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>HONDA AUTO CO. LTD</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                Media General Promotion
+                <div>
+                    <table class="table md-table text-left" border="1">
+                        <thead>
+                            <tr>
+                                <th>Target string</th>
+                                <th>Match count</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="first-priority">
+                                <td>Publishing & Media General Promotion</td>
+                                <td>3</td>
+                                <td>First</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>Business & Technology general Promotion</td>
+                                <td>2</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>Communication General Promotion</td>
+                                <td>2</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="second-priority">
+                                <td>HONDA MOTORS</td>
+                                <td>1</td>
+                                <td>Second</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>General Motors SA</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="third-priority">
+                                <td>Publishing & Media SEC</td>
+                                <td>1</td>
+                                <td>Third</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>Business & Technology Corporate Promotion/Sponsorship</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+                            <tr class="fourth-priority">
+                                <td>Print Media: Comb Copy & NEC</td>
+                                <td>1</td>
+                                <td>Fourth</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ol>
+    </div>-->
+
+    <div>
+        <h1>Application</h1>
+        <div>
+            <ol>
+                <li>Provide auto string mapping against source string.</li>
+                <li>Provide matching recommendation against source string.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div>
+        <h1>Business Needs</h1>
+        <div class="padding-left30">
+            <p>
+                Search engine is what increases your chances of being found when customers search for a product or service with Google, Bing, and other search engines.
+            </p>
+            <p>
+                For any custom ETL tool focus is to get unmapped entities from staging area and show best matching strings as per previous saved translations, we are writing custom ETL service to handled complex business logic with multiple file template and languages as per data provider companies.
+            </p>
+            <p>
+                To achieve complex file processing, we developed our own custom recommendation engine using <a href="#algorithm">Levenshtein Distance Algorithm</a>.
+            </p>
+        </div>
+        <div class="padding-left30">
+            <h3>
+                Note
+            </h3>
+            <div class="padding-left30">
+                MatrixSearch engine works against text only (Currently working with only text not supporting any media files for e.g. picture, html and video).
+            </div>
+        </div>
+
+        <div>
+            <h1>Transform Techniques</h1>
+            <div class="padding-left30">
+                <p>
+                    Some of the most powerful approaches to semantic processing are based on the use of mathematical transform techniques. Matrix driven techniques have been the most successful.
+                </p>
+                <p>
+                    We use Levenshtein Distance Algorithm which is based on matrix technique that help us produce high precision results.
+                </p>
+            </div>
+        </div>
+        <div>
+            <h1>MatrixSearch Processing</h1>
+            <table>
+                <tr>
+                    <td width="50%">
+                        <div class="">
+                            <h3 class="table-title-bg">Compare, Refine, Evaluate and Iterate</h3>
+                            <img src="../../../assets/images/img-engine.png" />
+                        </div>
+                    </td>
+                    <td width="50%" class="vertical-top align-left">
+                        <h3 class="table-title-bg">Text Process comprises following steps</h3>
+                        <div class="padding-left30">
+                            <div>
+                                <ul class="ul-list">
+                                    <li class="padding-bottom-10">- Receives source text key</li>
+                                    <li class="padding-bottom-10">- Target text acquisition</li>
+                                    <li>
+                                        - Compare, Refine, Evaluation and Iterate
+                                        <ul class="ul-list">
+                                            <li>
+                                                <h6>Compare:</h6>
+                                                <ul class="ul-list">
+                                                    <li>Compare source key text with target text</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <h6>Refine:</h6>
+                                                <ul class="ul-list">
+                                                    <li>Define content strategy</li>
+                                                    <li>Sort as per nearest match rank (measures the effectiveness)</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <h6>Evaluation:</h6>
+                                                <ul class="ul-list">
+                                                    <li>Define content size for result set</li>
+                                                    <li>Content creation</li>
+                                                </ul>
+
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>- Pass information for business use</li>
+                                </ul>
+                            </div>
+
+                            <!--
+                                1.	Receives source text key
+                                2.	Target text acquisition
+                                3.	Compare, Refine, Evaluation and Iterate
+                                    a.	Compare:
+                                        i.	Compare source key text with target text
+                                    b.	Refine:
+                                        i.	Define content strategy
+                                        ii.	Sort as per nearest match rank (measures the effectiveness)
+                                    c.	Evaluation:
+                                        i.	Define content size for result set
+                                        ii.	Content creation
+                                4.	Pass information for business use
+                            -->
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+
+        </div>
+        <div class="margin-top30">
+            <h1>Summary</h1>
+            <div class="padding-left30">
+                That was an overview of MatrixSearch engine. Search/Recommendation engine can be very complex topic, but we have implemented small and important part as per our business need. Your business definitely needs to have an search strategy in place if you are providing/harmonizing online marketing data.
+            </div>
+
+            <!--
+            String comparison cases:
+            1.	Word to word
+                If distance source and target is less than equal to min tolerance, then consider that work and mark priority first else skip the word.
+            2.	Word to string / string to word
+                Check word contains in the string:
+                •	Yes
+                    Check word count of string is 2
+                    o	Yes: Mark priority to second
+                    o	No: Mark priority to Fourth
+                •	No
+                    Check word contain nearest word using Levenshtein Distance Algorithm
+                    o	Yes: Check word count of string is 2
+                        •	Yes: Mark priority to Third
+                        •	No: Mark priority to Fourth
+                    o	No: Ignore from search
+            3.	String to string
+                a.	Compare two strings get common word count as a match count
+                b.	Filter out uncommon words from source and target strings
+                c.	Compare filtered source and target strings
+                    Compare two strings word by word
+                    •	If any word matches, then increase match count
+                d.	If | count(source) – count(target) | > 2 then Ignore from search
+                e.	Set priority
+                    Check match count > 0
+                    •	Yes: If (match count = count(target) or (count = count(source) and |count(source) - count(target)| <= min tolerance))
+                            o	Yes: Mark priority First
+                            o	No: If (match count >= ceil(count(target) / 2) or match count >= ceil(count(source) / 2))
+                                    •	Yes: Mark priority Second
+                                    •	No: If (count(target) - match count > 2 or count(source) - match count > 2)
+                                            o	Yes: Mark priority Fourth
+                                            o	No: Mark priority Third
+                    •	No: Ignore from search
+            -->
+
+
+        </div>
+
+        <div class="margin-top30">
+            <h1>Git link</h1>
+            <div class="padding-left30">
+                <a href="https://github.com/nikhilb-cuelogic/Principle">Go to GitHub</a>
+            </div>
+        </div>
+
+        <div class="margin-top30">
+            <h1>Note</h1>
+            <div class="padding-left30">
+                This is my first blog, I would like if you suggest your suggession to improve algorithm and blog.
+            </div>
+        </div>
+    </div>
+

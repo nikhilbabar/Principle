@@ -1,0 +1,122 @@
+﻿Liskov Substitution Principle:
+
+Child class should not break parent class's type definition and behavior. 
+
+
+Let's continue with the same customer. Let's say our system wants to calculate discounts for Enquiries. Now Enquiries 
+are not actual customer's they are just leads. Because they are just leads we do not want to save them to database for now.
+
+So we create a new class called as Enquiry which inherits from the "Customer" class. We provide some discounts to the 
+enquiry so that they can be converted to actual customers and we override the "Add" method with an exception so that no 
+one can add an Enquiry to the database.
+
+
+class Enquiry : Customer
+{
+	public override double GetDiscount(double TotalSales)
+	{
+		return base.GetDiscount(TotalSales) - 5;
+	}
+
+	public override void Add()
+	{
+		throw new Exception("Not allowed");
+	}
+}
+
+If you visualize the current customer inheritance hierarchy it looks something as shown below. In other word "Customer" is 
+the parent class with "Gold" , "Silver" and "Enquiry" as child classes.
+
+			Customer
+			   |
+  _____________________________
+  |			   |			  |
+  |			   |			  |
+Gold		Silver			Enquiry
+
+So as per polymorphism rule my parent "Customer" class object can point to any of it child class objects i.e. "Gold", "Silver" or "Enquiry" 
+during runtime without any issues.
+
+So for instance in the below code you can see I have created a list collection of "Customer" and thanks to polymorphism I can add "Silver" , 
+"Gold" and "Enquiry" customer to the "Customer" collection without any issues.
+
+Thanks to polymorphism I can also browse the "Customer" list using the parent customer object and invoke the "Add" method as shown in the below code.
+
+Now again let me tickle your brains, there is a slight problem here, THINK, THINK THINK.
+
+HINT: -Watch when the Enquiry object is browsed and invoked in the "FOR EACH" loop.
+
+
+List<Customer> customers = new List<Customer>();
+customers.Add(new SilverCustomer());
+customers.Add(new GoldCustomer());
+customers.Add(new Enquiry());
+
+foreach (Customer item in customers)
+{
+	item.Add();
+}
+
+As per the inheritance hierarchy the "Customer" object can point to any one of its child objects and we do not expect any unusual behavior.
+
+But when "Add" method of the "Enquiry" object is invoked it leads to error because our "Equiry" object does save enquiries to database 
+as they are not actual customers.
+
+
+Now read the below paragraph properly to understand the problem. If you do not understand the below paragraph read it twice..
+
+In other words the "Enquiry" has discount calculation , it looks like a "Customer" but IT IS NOT A CUSTOMER. So the parent cannot replace 
+the child object seamlessly. In other words "Customer" is not the actual parent for the "Enquiry" class. "Enquiry" is a different entity altogether. 
+
+
+
+So LISKOV principle says the parent should easily replace the child object. 
+So to implement LISKOV we need to create two interfaces one is for discount and other for database as shown below.
+
+interface IDiscount
+{
+	double GetDiscount(double TotalSales);
+}
+
+
+interface IDatabase
+{
+	void Add();
+}
+
+Now the "Enquiry" class will only implement "IDiscount" as he not interested in the "Add" method.
+
+class Enquiry : IDiscount
+{
+	public  double GetDiscount(double TotalSales)
+	{
+		return TotalSales - 5;
+	}
+}
+
+While the "Customer" class will implement both "IDiscount" as well as "IDatabase" as it also wants to persist the customer to the database.
+
+class Customer : IDiscount, IDatabase
+{
+	public virtual void Add()
+	{
+		try
+		{
+			// Database code goes here
+		}
+		catch (Exception ex)
+		{
+			obj.Handle(ex.Message.ToString());
+		}
+	}
+
+	public virtual double GetDiscount(double TotalSales)
+	{
+		return TotalSales;
+	}
+}
+Now there is no confusion, we can create a list of "IDatabase" interface and add the relevant classes to it. In case we make a mistake of 
+adding "Enquiry" class to the list compiler would complain.
+
+ 
+

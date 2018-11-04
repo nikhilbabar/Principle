@@ -1,0 +1,33 @@
+﻿Single Responsibility Principle:
+
+A class should take one responsibility and there should be one reason to change that class. 
+Now what does that mean? I want to share one picture to give a clear idea about this.
+
+Now see this tool is a combination of so many different tools like knife, nail cutter, 
+screw driver, etc. So will you want to buy this tool? I don't think so. Because there is a problem 
+with this tool, if you want to add any other tool to it, then you need to change the base and that 
+is not good. This is a bad architecture to introduce into any system. It will be better if nail 
+cutter can only be used to cut the nail or knife can only be used to cut vegetables.
+
+Example:
+class Customer
+{
+    public void Add()
+    {
+        try
+        {
+            // Database code goes here
+        }
+        catch (Exception ex)
+        {
+            System.IO.File.WriteAllText(@"c:\Error.txt", ex.ToString());
+        }
+    }
+}
+
+The above customer class is doing things WHICH HE IS NOT SUPPOSED TO DO. Customer class should do customer 
+data validations, call the customer data access layer etc , but if you see the catch block closely it also 
+doing LOGGING activity. In simple words its over loaded with lot of responsibility.
+
+So tomorrow if add a new logger like event viewer I need to go and change the "Customer" class, that's very ODD.
+

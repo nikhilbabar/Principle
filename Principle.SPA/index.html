@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Developer Network</title>
+    <meta charset="utf-8" />
+
+    <!-- Libraries -->
+    <script src="assets/scripts/angular.js"></script>
+    <script src="assets/scripts/angular-route.js"></script>
+    <script src="assets/scripts/angular-messages.js"></script>
+    <script src="assets/scripts/angular-resource.js"></script>
+
+    <!-- Configuration and Navigation -->
+    <script src="app/app-module.js"></script>
+    <script src="app/app-config.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/components/playground/playground-controller.js"></script>
+    <script src="app/components/algorithm/algorithm-controller.js"></script>
+    <script src="app/components/engine/engine-controller.js"></script>
+    <script src="app/components/module/etl-controller.js"></script>
+
+    <!-- Services -->
+    <script src="app/services/common-service.js"></script>
+
+    <!-- Factories -->
+    <script src="app/factories/data-access-factory.js"></script>
+
+    <!-- Style -->
+    <link href="assets/styles/style-reset.css" rel="stylesheet" />
+    <link href="assets/styles/style-app.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div ng-app="dpDesign">
+        <div class="header-wrapper"
+        <!-- Begin Header -->
+        <header>
+            <h1>Developer Network | Patterns & Practices</h1>
+        </header>
+        <!-- End Header -->
+
+        <!-- Begin Content -->
+        <nav class="navigation">
+            <!--<a class="xs-padding" href="#module">ETL</a>-->
+            <a class="xs-padding" href="#!/engine">Engine</a>
+            <a class="xs-padding" href="#!/algorithm">Algorithm</a>
+            <a class="xs-padding" href="#!/playground">Playground</a>
+        </nav>
+        </div>
+        <section id="nav-content" class="xs-margin xs-padding" ng-view></section>
+        <!-- End Content -->
+        
+        <!-- Begin Footer -->
+        <footer class="footer">
+            <div class="xs-padding footer-title">
+                <div class="header3">Patterns & Practices &copy; 2016</div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+    </div>
+</body>
+</html>

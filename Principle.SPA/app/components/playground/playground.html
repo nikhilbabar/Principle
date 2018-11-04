@@ -1,0 +1,97 @@
+﻿<div class="table-actions">
+    <h4 class="table-title pull-left">{{ vm.subtitle }}</h4>
+    <div class="clearfix">
+        <div class="add-entity">
+            <input type="text" ng-model="vm.newEntity" />
+            <input type="button" class="btn btn-default" value="Add" ng-click="vm.add()" />
+        </div>
+        <div class="add-entity">
+            <label for="data-size" class="padding-right-10">Data size</label>
+            <select name="data-size" id="data-size"
+                    ng-options="option.Name for option in vm.sizes track by option.Id"
+                    ng-model="vm.size"
+                    ng-change="vm.getInput()"></select>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="entity in vm.entities">
+
+            <td>{{ entity.Name }}</td>
+            <td>
+                <a ng-click="vm.remove(entity)">Remove</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                Total number of records: {{ vm.entities.length }}
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="sm-left-margin">
+    <input type="button" class="btn btn-default" value="Recommendations" ng-click="vm.getRecommendation()" />
+</div>
+<div class="table-legends" ng-show="vm.recommendations.length > 0">
+    <label>Priorities</label>
+    <span class="first-priority">First</span>
+    <span class="second-priority">Second</span>
+    <span class="third-priority">Third</span>
+    <span class="fourth-priority">Fourth</span>
+    <span class="fifth-priority">Fifth</span>
+</div>
+<table class="table recommandations" ng-show="vm.recommendations.length > 0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th claas="md-width" class="text-center">Matches</th>
+            <th>Recommendations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="entity in vm.recommendations">
+
+            <td>
+                <div class="entity-name">
+                    {{ entity.Name }}
+                </div>
+            </td>
+            <td class="text-center">
+                <strong>{{ entity.Suggestions.length }}</strong>
+            </td>
+            <td>
+                <!--<div ng-repeat="suggestion in entity.Suggestions">
+                    {{ suggestion.Name + suggestion.Priority }}
+                </div>-->
+                <table class="table md-table text-left small-table" border="1">
+                    <tbody>
+                        <tr ng-repeat="suggestion in entity.Suggestions" ng-class="suggestion.Priority == 1 ? 'first-priority' : (suggestion.Priority == 2 ? 'second-priority' : (suggestion.Priority == 3 ? 'third-priority' : (suggestion.Priority == 4 ? 'fourth-priority' : 'fifth-priority')))">
+                            <td>{{ suggestion.Name }}</td>
+                            <td style="background-color: darkgray; font-weight: 900;">{{ suggestion.Priority }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                Total number of records: {{ vm.recommendations.length }}
+            </td>
+        </tr>
+    </tfoot>
+</table>

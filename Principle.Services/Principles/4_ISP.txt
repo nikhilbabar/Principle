@@ -1,0 +1,62 @@
+﻿Interface Segregation Principle:
+
+Now assume that our customer class has become a SUPER HIT component and it's consumed across 1000 clients and they are very 
+happy using the customer class.
+
+Now let's say some new clients come up with a demand saying that we also want a method which will help us to "Read" customer data. 
+So developers who are highly enthusiastic would like to change the "IDatabase" interfaceas shown below.
+
+But by doing so we have done something terrible, can you guess? 
+
+HINT: - Think about the effect of this change on the above image.
+
+interface IDatabase
+{
+	void Add();		// Old client are happy with these.
+	voidRead();		// Added for new clients.
+}
+
+If you visualize the new requirement which has come up, you have two kinds of client's:
+
+Who want's just use "Add" method.
+The other who wants to use "Add" + "Read".
+Now by changing the current interface you are doing an awful thing, disturbing the 1000 satisfied current client's , even when they are 
+not interested in the "Read" method. You are forcing them to use the "Read" method.
+
+So a better approach would be to keep existing clients in their own sweet world and the serve the new client's separately.
+
+So the better solution would be to create a new interface rather than updating the current interface. So we can keep the current 
+interface "IDatabase" as it is and add a new interface "IDatabaseV1" with the "Read" method the "V1" stands for version 1.
+
+
+interface IDatabaseV1 : IDatabase // Gets the Add method
+{
+	void Read();
+}
+
+You can now create fresh classes which implement "Read" method and satisfy demands of your new clients and your old clients stay 
+untouched and happy with the old interface which does not have "Read" method.
+
+
+class CustomerwithRead : IDatabase, IDatabaseV1
+{
+	public void Add()
+	{
+		Customer newCustomer = new Customer();
+		newCustomer.Add();
+	}
+
+	public void Read()
+	{
+		// Implements  logic for read
+	}
+}
+
+So the old clients will continue using the "IDatabase" interface while new client can use "IDatabaseV1" interface.
+
+
+IDatabase item = new Customer(); // 1000 happy old clients not touched
+item.Add();
+
+IDatabaseV1 itemV1 = new CustomerWithread(); // new clients
+itemV1.Read();
